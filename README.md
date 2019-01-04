@@ -1,6 +1,6 @@
 ### Reference Bob Plugin: Git
 
-This is a simple plugin enabling Bob to read git repositories.
+This is a simple external resource enabling Bob to read git repositories.
 
 #### Requirements
 - Python 3.5+
