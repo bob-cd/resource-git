@@ -13,16 +13,24 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-FROM python:3
+[tool.poetry]
+name = "resource-git"
+version = "0.1.0"
+description = "A reference bob resource provider handling remote git repos."
+authors = [
+    "Rahul De <rahul080327@gmail.com>"
+]
+license = "GPL-3.0+"
 
-WORKDIR /opt
+[tool.poetry.dependencies]
+python = "^3.6"
+Sanic = "^19.3"
+GitPython = "^2.1"
+requests = "^2.21"
 
-ADD server.py .
-ADD pyproject.toml .
-ADD poetry.lock .
+[tool.poetry.dev-dependencies]
+pytest = "^4.3"
 
-RUN pip install poetry
-RUN poetry config settings.virtualenvs.create false
-RUN poetry install
-
-ENTRYPOINT ["python3", "server.py"]
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"

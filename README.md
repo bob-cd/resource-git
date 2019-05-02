@@ -1,13 +1,14 @@
-### Reference Bob Plugin: Git
+### Reference Bob Resource: Git
 
 This is a simple external resource enabling Bob to read git repositories.
 
 #### Requirements
 - Python 3.5+
 - Git 1.7+
+- [Poetry](https://poetry.eustace.io)
 
 #### Running
-- `pip3 install -r requirements.txt` to install dependencies.
+- `poetry install` to install dependencies.
 - `python3 server.py` will start the plugin on port 8000.
 
 #### API
