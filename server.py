@@ -26,7 +26,7 @@ app = Sanic()
 PORT = 8000
 
 
-@app.route("/bob_request")
+@app.route("/bob_resource")
 async def handle(request):
     repo = request.args.get("repo")
     branch = request.args.get("branch")
