@@ -32,7 +32,8 @@ def tar_dir(tarfile_name, source_dir):
         oldpwd = os.getcwd()
         os.chdir(source_dir)
 
-        tar.add(".", arcname=os.path.basename(source_dir))
+        for f in os.listdir("."):
+            tar.add(f)
 
         os.chdir(oldpwd)
 
