@@ -16,14 +16,25 @@
 import os
 import shutil
 import tempfile
+import tarfile
 from urllib.parse import urljoin
 
 import requests
 from git import Repo
 from sanic import Sanic, response
 
-app = Sanic()
+app = Sanic(name="bob_resource_git")
 PORT = 8000
+
+
+def tar_dir(tarfile_name, source_dir):
+    with tarfile.open(tarfile_name, "w") as tar:
+        oldpwd = os.getcwd()
+        os.chdir(source_dir)
+
+        tar.add(".", arcname=os.path.basename(source_dir))
+
+        os.chdir(oldpwd)
 
 
 @app.route("/bob_resource")
@@ -34,20 +45,20 @@ async def handle(request):
     if any(map(lambda _: _ is None, [repo, branch])):
         return response.text("Invalid params", status=400)
 
-    zip_file = "repo.zip"
+    archive = "repo.tar"
 
-    if os.path.exists(zip_file):
-        os.remove(zip_file)
+    if os.path.exists(archive):
+        os.remove(archive)
 
     clone_dir = tempfile.mkdtemp()
 
     Repo.clone_from(repo, clone_dir, branch=branch)
 
-    shutil.make_archive("repo", "zip", clone_dir)
+    tar_dir(archive, clone_dir)
 
     shutil.rmtree(clone_dir)
 
-    return await response.file(zip_file)
+    return await response.file_stream(archive)
 
 
 @app.route("/ping")
