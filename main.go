@@ -98,10 +98,10 @@ func Clone(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	dir := "repo"
+	archive := fmt.Sprintf("%d", time.Now().UnixNano())
+	dir := "repo-" + archive
 	os.MkdirAll(dir, os.ModePerm)
 	defer os.RemoveAll(dir)
-	archive := fmt.Sprintf("%d", time.Now().UnixNano())
 	defer os.Remove(archive)
 
 	_, err := git.PlainClone(dir, false, &git.CloneOptions{
