@@ -15,7 +15,7 @@ jobs:
           go-version: '^1.15'
 
       - name: build binary
-        run: go build main.go -o main
+        run: go build -o main main.go
 
       - name: build image
         run: docker build -t ghcr.io/bob-cd/resource-git:latest .
