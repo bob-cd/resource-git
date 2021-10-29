@@ -1,0 +1,24 @@
+name: Deploy
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: "ubuntu-latest"
+
+    steps:
+      - name: "Checkout code"
+        uses: "actions/checkout@v2"
+
+      - uses: actions/setup-go@v2
+        with:
+          go-version: '^1.15'
+
+      - name: build binary
+        run: go build -o main main.go
+
+      - name: build image
+        run: docker build -t ghcr.io/bob-cd/resource-git:latest .
+
+      - name: push image
+        run: echo ${{ secrets.GHCR_TOKEN }} | docker login ghcr.io --username lispyclouds --password-stdin && docker push ghcr.io/bob-cd/resource-git:latest
