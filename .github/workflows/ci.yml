@@ -12,13 +12,30 @@ jobs:
 
       - uses: actions/setup-go@v2
         with:
-          go-version: '^1.15'
+          go-version: '^1.18'
 
-      - name: build binary
-        run: go build -o main main.go
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
 
-      - name: build image
-        run: docker build -t ghcr.io/bob-cd/resource-git:latest .
+      - name: Prep binary dirs
+        run: |
+          mkdir -p linux/amd64
+          mkdir -p linux/arm64
 
-      - name: push image
-        run: echo ${{ secrets.GHCR_TOKEN }} | docker login ghcr.io --username lispyclouds --password-stdin && docker push ghcr.io/bob-cd/resource-git:latest
+      - name: Build amd64 binary
+        env:
+          GOOS: linux
+          GOARCH: amd64
+        run: go build -o linux/amd64/main main.go
+
+      - name: Build arm64 binary
+        env:
+          GOOS: linux
+          GOARCH: arm64
+        run: go build -o linux/arm64/main main.go
+
+      - name: Docker login
+        run: echo ${{ secrets.GHCR_TOKEN }} | docker login ghcr.io --username lispyclouds --password-stdin
+
+      - name: Build and push image
+        run: docker buildx build --push --platform linux/amd64,linux/arm64 -t ghcr.io/bob-cd/resource-git:latest .

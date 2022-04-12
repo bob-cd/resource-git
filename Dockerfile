@@ -6,6 +6,8 @@
 
 FROM scratch
 
-COPY main .
+ARG TARGETPLATFORM
+
+COPY ${TARGETPLATFORM}/main .
 
 ENTRYPOINT ["./main"]
