@@ -26,12 +26,14 @@ jobs:
         env:
           GOOS: linux
           GOARCH: amd64
+          CGO_ENABLED: 0
         run: go build -o linux/amd64/main main.go
 
       - name: Build arm64 binary
         env:
           GOOS: linux
           GOARCH: arm64
+          CGO_ENABLED: 0
         run: go build -o linux/arm64/main main.go
 
       - name: Docker login
