@@ -4,7 +4,7 @@
 # license that can be found in the LICENSE file or at
 # https://opensource.org/licenses/MIT.
 
-FROM scratch
+FROM --platform=linux/amd64 scratch
 
 ARG TARGETPLATFORM
 
