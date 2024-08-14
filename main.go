@@ -1,5 +1,5 @@
 /*
-* Copyright 2018-2021 Rahul De
+* Copyright 2018- Rahul De
 *
 * Use of this source code is governed by an MIT-style
 * license that can be found in the LICENSE file or at
@@ -25,7 +25,7 @@ import (
 	githttp "github.com/go-git/go-git/v5/plumbing/transport/http"
 )
 
-func Tar(src string, archiveName string) error {
+func makeTar(src string, archiveName string) error {
 	if _, err := os.Stat(src); err != nil {
 		return err
 	}
@@ -75,11 +75,11 @@ func Tar(src string, archiveName string) error {
 	return nil
 }
 
-func Ping(w http.ResponseWriter, r *http.Request) {
+func ping(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "Ack")
 }
 
-func Clone(w http.ResponseWriter, r *http.Request) {
+func clone(w http.ResponseWriter, r *http.Request) {
 	repo := r.URL.Query().Get("repo")
 	branch := r.URL.Query().Get("branch")
 
@@ -109,7 +109,7 @@ func Clone(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err := Tar(dir, archive); err != nil {
+	if err := makeTar(dir, archive); err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		fmt.Fprint(w, err.Error())
 
@@ -133,8 +133,8 @@ func main() {
 
 	client.InstallProtocol("https", githttp.NewClient(customClient))
 
-	http.HandleFunc("/ping", Ping)
-	http.HandleFunc("/bob_resource", Clone)
+	http.HandleFunc("/ping", ping)
+	http.HandleFunc("/bob_resource", clone)
 
 	http.ListenAndServe(":"+port, nil)
 }
