@@ -4,7 +4,7 @@
 * Use of this source code is governed by an MIT-style
 * license that can be found in the LICENSE file or at
 * https://opensource.org/licenses/MIT.
-*/
+ */
 
 package main
 
@@ -36,9 +36,7 @@ func makeTar(src string, archiveName string) error {
 	}
 	defer tarfile.Close()
 
-	var fileWriter io.WriteCloser = tarfile
-
-	tw := tar.NewWriter(fileWriter)
+	tw := tar.NewWriter(tarfile)
 	defer tw.Close()
 
 	err = filepath.Walk(src, func(file string, fi os.FileInfo, err error) error {
