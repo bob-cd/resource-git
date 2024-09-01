@@ -3,7 +3,7 @@
 This is a simple external resource enabling Bob to read git repositories.
 
 #### Requirements
-- [Go](https://golang.org/dl/) 1.18+
+- [Go](https://golang.org/dl/) 1.22+
 
 #### Running
 - `go build main.go` to compile the code and obtain a binary `main`.

@@ -131,8 +131,8 @@ func main() {
 
 	client.InstallProtocol("https", githttp.NewClient(customClient))
 
-	http.HandleFunc("/ping", ping)
-	http.HandleFunc("/bob_resource", clone)
+	http.HandleFunc("GET /ping", ping)
+	http.HandleFunc("GET /bob_resource", clone)
 
 	http.ListenAndServe(":"+port, nil)
 }
