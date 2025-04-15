@@ -4,7 +4,7 @@ go 1.23.0
 
 toolchain go1.23.6
 
-require github.com/go-git/go-git/v5 v5.15.0
+require github.com/go-git/go-git/v5 v5.16.0
 
 require (
 	dario.cat/mergo v1.0.1 // indirect
