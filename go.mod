@@ -4,7 +4,7 @@ go 1.24.0
 
 toolchain go1.24.7
 
-require github.com/go-git/go-git/v5 v5.16.2
+require github.com/go-git/go-git/v5 v5.16.3
 
 require (
 	dario.cat/mergo v1.0.2 // indirect
@@ -22,10 +22,10 @@ require (
 	github.com/onsi/gomega v1.38.0 // indirect
 	github.com/pjbgf/sha1cd v0.5.0 // indirect
 	github.com/sergi/go-diff v1.4.0 // indirect
-	github.com/skeema/knownhosts v1.3.1 // indirect
+	github.com/skeema/knownhosts v1.3.2 // indirect
 	github.com/xanzy/ssh-agent v0.3.3 // indirect
-	golang.org/x/crypto v0.42.0 // indirect
-	golang.org/x/net v0.44.0 // indirect
-	golang.org/x/sys v0.36.0 // indirect
+	golang.org/x/crypto v0.43.0 // indirect
+	golang.org/x/net v0.46.0 // indirect
+	golang.org/x/sys v0.37.0 // indirect
 	gopkg.in/warnings.v0 v0.1.2 // indirect
 )
